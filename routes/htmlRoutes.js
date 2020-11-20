@@ -11,9 +11,9 @@ module.exports = function(app) {
   // HTML GET Requests
   // Below code handles when users "visit" a page.
 
-  app.get("/index", function(req, res) {
-    res.sendFile(path.join(__dirname, "../assets/index.html"));
-  });
+//   app.get("/index", function(req, res) {
+//     res.sendFile(path.join(__dirname, "../assets/index.html"));
+//   });
 
   app.get("/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "../assets/notes.html"));
