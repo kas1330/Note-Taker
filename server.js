@@ -24,11 +24,15 @@ app.use(express.json());
 // require('./routes/apiRoutes')(app);
 require('./routes/htmlRoutes')(app);
 
+//returns the file as json
 app.get('/api/notes', function(req, res) {
     //__dirname is the absolute path to this file. path.join join each element to create a new filepath
     // res.sendFile transfers the file at the given path and it sets the Content-Type response HTTP header field based on the filename extension. In this case .json
+    //saving as json
     res.sendFile(path.join(__dirname, '/db/db.json'));
-})
+});
+
+
 
 
 
