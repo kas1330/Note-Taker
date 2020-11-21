@@ -36,7 +36,22 @@ app.get('/api/notes', function(req, res) {
 });
 
 app.post('/api/notes', function(req,res){
+    //parse the json file
     var saved = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
+    // req.body property contains key-value pairs of data submitted in the request body
+    var newNote = req.body;
+    //use the length of the object as the id
+    var nId = (saved.length).toString();
+    //set the new id
+    newNote.id = nId;
+    //push the newest note
+    saved.push(newNote);
+    //writes to file or creates a new file if the file doesn't already exist
+    fs.writeFileSync('./db/db.json', JSON.stringify(saved));
+    console.log('Notes saved: ', newNote);
+    //sends a json response, saved is sent as the body of the response
+    res.json(saved);
+
 })
 
 
