@@ -2,7 +2,8 @@
 // Series of npm packages that we will use to give our server useful functionality
 
 var express = require('express');
-
+var fs = require('fs');
+var path = require('path');
 // EXPRESS CONFIGURATION
 // This sets up the basic properties for our express server
 
