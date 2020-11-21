@@ -21,8 +21,16 @@ app.use(express.json());
 // The below points our server to a series of "route" files.
 // These routes give our server a "map" of how to respond when users visit or request data from various URLs.
 
-require('./routes/apiRoutes')(app);
+// require('./routes/apiRoutes')(app);
 require('./routes/htmlRoutes')(app);
+
+app.get('/api/notes', function(req, res) {
+    //__dirname is the absolute path to this file. path.join join each element to create a new filepath
+    // res.sendFile transfers the file at the given path and it sets the Content-Type response HTTP header field based on the filename extension. In this case .json
+    res.sendFile(path.join(__dirname, '/db/db.json'));
+})
+
+
 
 // LISTENER
 // The below code effectively "starts" our server
@@ -30,3 +38,4 @@ require('./routes/htmlRoutes')(app);
 app.listen(PORT, function () {
   console.log('App listening on PORT: ' + PORT);
 });
+
