@@ -25,6 +25,8 @@ app.use(express.json());
 require('./routes/htmlRoutes')(app);
 
 //returns the file as json
+//req is an object containing information about the HTTP request that raised the event
+// you use res to send back the desired HTTP response
 app.get('/api/notes', function(req, res) {
     //__dirname is the absolute path to this file. path.join join each element to create a new filepath
     // res.sendFile transfers the file at the given path and it sets the Content-Type response HTTP header field based on the filename extension. In this case .json
