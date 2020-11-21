@@ -24,6 +24,7 @@ app.use(express.json());
 // require('./routes/apiRoutes')(app);
 require('./routes/htmlRoutes')(app);
 
+
 //returns the file as json
 //req is an object containing information about the HTTP request that raised the event
 // you use res to send back the desired HTTP response
@@ -34,6 +35,9 @@ app.get('/api/notes', function(req, res) {
     res.sendFile(path.join(__dirname, '/db/db.json'));
 });
 
+app.post('/api/notes', function(req,res){
+    var saved = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
+})
 
 
 
