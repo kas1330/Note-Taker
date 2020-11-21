@@ -24,39 +24,6 @@ app.use(express.json());
 require('./routes/apiRoutes')(app);
 require('./routes/htmlRoutes')(app);
 
-
-//returns the file as json
-//req is an object containing information about the HTTP request that raised the event
-// you use res to send back the desired HTTP response
-// app.get('/api/notes', function(req, res) {
-//     //__dirname is the absolute path to this file. path.join join each element to create a new filepath
-//     // res.sendFile transfers the file at the given path and it sets the Content-Type response HTTP header field based on the filename extension. In this case .json
-//     //saving as json
-//     // res.sendFile(path.join(__dirname, '/db/db.json'));
-// });
-
-// app.post('/api/notes', function(req,res){
-//     //parse the json file
-//     var saved = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
-//     // req.body property contains key-value pairs of data submitted in the request body
-//     var newNote = req.body;
-//     //use the length of the object as the id
-//     var nId = (saved.length).toString();
-//     //set the new id
-//     newNote.id = nId;
-//     //push the newest note
-//     saved.push(newNote);
-//     //writes to file or creates a new file if the file doesn't already exist
-//     fs.writeFileSync('./db/db.json', JSON.stringify(saved));
-//     console.log('Notes saved: ', newNote);
-//     //sends a json response, saved is sent as the body of the response
-//     res.json(saved);
-
-// })
-
-
-
-
 // LISTENER
 // The below code effectively "starts" our server
 
