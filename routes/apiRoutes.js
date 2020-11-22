@@ -15,9 +15,9 @@ module.exports = function(app) {
   app.get("/api/notes", function(req, res) {
     //read the json data and returns it
     res.sendFile(path.join(__dirname, './db.json'));
-    console.log('Path: ',__dirname, './db.json');
+    // console.log('Path: ',__dirname, './db.json');
 
-    console.log('Get works');
+    // console.log('Get works');
   });
 
   app.post('/api/notes', function(req,res){
@@ -42,13 +42,25 @@ module.exports = function(app) {
 
 });
 
-app.delete('/api/notes:id', function(req,res){
+app.delete('/api/notes/:id', function(req,res){
+  console.log('In delete method');
+  
   //parse JSON
   var saved = JSON.parse(fs.readFileSync('./routes/db.json', 'utf-8'));
+  //get the id of the note to be deleted
+  console.log('Id to be deleted: ', req.params.id);
   var noteId = req.params.id;
+  console.log('Id to be deleted2: ', noteId);
+  var newNum = 0;
   saved = saved.filter(currentNote => {
     return currentNote.id != noteId;
   })
+  for(currentNote of saved){
+    currentNote.id = newNum.toString();
+    newNum++;
+  }
+  fs.writeFileSync('./routes/db.json', JSON.stringify(saved));
+  res.json(saved);
 });
 
 
