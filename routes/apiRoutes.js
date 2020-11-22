@@ -2,22 +2,13 @@
 var fs = require('fs');
 var path = require("path");
 
-// ===============================================================================
-// ROUTING
-// ===============================================================================
+
 
 module.exports = function(app) {
-  // API GET Requests
-  // Below code handles when users "visit" a page.
-  // In each of the below cases when a user visits a link
-  // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
 
   app.get("/api/notes", function(req, res) {
     //read the json data and returns it
     res.sendFile(path.join(__dirname, './db.json'));
-    // console.log('Path: ',__dirname, './db.json');
-
-    // console.log('Get works');
   });
 
   app.post('/api/notes', function(req,res){
@@ -29,7 +20,6 @@ module.exports = function(app) {
     var newNote = req.body;
     //use the length of the object as the id
     var nId = (saved.length).toString();
-    // console.log()
     //set the new id
     newNote.id = nId;
     //push the newest note
@@ -48,17 +38,21 @@ app.delete('/api/notes/:id', function(req,res){
   //parse JSON
   var saved = JSON.parse(fs.readFileSync('./routes/db.json', 'utf-8'));
   //get the id of the note to be deleted
-  console.log('Id to be deleted: ', req.params.id);
   var noteId = req.params.id;
-  console.log('Id to be deleted2: ', noteId);
+  //keep track of the new id nums
   var newNum = 0;
+  //Filter out everything not equal to the id to be deleted, save all into new 'saved' var
   saved = saved.filter(currentNote => {
     return currentNote.id != noteId;
   })
+
+  //Re number the id's of the notes left after one was deleted.
   for(currentNote of saved){
     currentNote.id = newNum.toString();
     newNum++;
+    console.log('Current Note: ',currentNote);
   }
+  //convert response to string and send it
   fs.writeFileSync('./routes/db.json', JSON.stringify(saved));
   res.json(saved);
 });
