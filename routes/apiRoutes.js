@@ -13,11 +13,14 @@ module.exports = function(app) {
   app.get("/api/notes", function(req, res) {
     //read the json data and returns it
     res.sendFile(path.join(__dirname, '/db/db.json'));
+    console.log('Get works');
   });
 
   app.post('/api/notes', function(req,res){
+    console.log('In the POST method');
     //parse the json file
     var saved = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
+    console.log('POST method: ', saved);
     // req.body property contains key-value pairs of data submitted in the request body
     var newNote = req.body;
     //use the length of the object as the id
