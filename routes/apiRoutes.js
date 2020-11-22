@@ -42,8 +42,13 @@ module.exports = function(app) {
 
 });
 
-app.delete('/api/notes', function(req,res){
-
+app.delete('/api/notes:id', function(req,res){
+  //parse JSON
+  var saved = JSON.parse(fs.readFileSync('./routes/db.json', 'utf-8'));
+  var noteId = req.params.id;
+  saved = saved.filter(currentNote => {
+    return currentNote.id != noteId;
+  })
 });
 
 
